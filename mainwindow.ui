@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry"><rect><x>0</x><y>0</y><width>1200</width><height>780</height></rect></property>
+  <property name="minimumSize"><size><width>1020</width><height>700</height></size></property>
+  <property name="windowTitle"><string>Инерциальная навигация — вариант 1</string></property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="rootLayout">
+    <property name="spacing"><number>18</number></property>
+    <property name="leftMargin"><number>22</number></property>
+    <property name="topMargin"><number>20</number></property>
+    <property name="rightMargin"><number>22</number></property>
+    <property name="bottomMargin"><number>20</number></property>
+    <item>
+     <layout class="QHBoxLayout" name="headerLayout">
+      <property name="spacing"><number>16</number></property>
+      <item>
+       <widget class="QLabel" name="labelMonogram">
+        <property name="minimumSize"><size><width>52</width><height>52</height></size></property>
+        <property name="maximumSize"><size><width>52</width><height>52</height></size></property>
+        <property name="text"><string>INS</string></property>
+        <property name="alignment"><set>Qt::AlignCenter</set></property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="titleLayout">
+        <property name="spacing"><number>3</number></property>
+        <item><widget class="QLabel" name="labelTitle"><property name="text"><string>Инерциальная навигация</string></property></widget></item>
+        <item><widget class="QLabel" name="labelSubtitle"><property name="text"><string>Потеря GPS · накопление ошибки · коррекция позиции</string></property></widget></item>
+       </layout>
+      </item>
+      <item><spacer name="headerSpacer"><property name="orientation"><enum>Qt::Horizontal</enum></property><property name="sizeHint" stdset="0"><size><width>40</width><height>20</height></size></property></spacer></item>
+      <item><widget class="QLabel" name="labelVariant"><property name="text"><string>ВАРИАНТ 01</string></property><property name="alignment"><set>Qt::AlignCenter</set></property></widget></item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="contentLayout" stretch="1,0">
+      <property name="spacing"><number>16</number></property>
+      <item>
+       <layout class="QVBoxLayout" name="visualsLayout" stretch="1,0">
+        <property name="spacing"><number>14</number></property>
+        <item>
+         <widget class="NavigationView" name="graphicsView">
+          <property name="minimumSize"><size><width>530</width><height>280</height></size></property>
+          <property name="toolTip"><string>Зелёная траектория — истина, синяя — оценка. Стрелки показывают направление скорости. Жёлтый пунктир — текущая ошибка положения.</string></property>
+          <property name="accessibleName"><string>Истинная и оценённая траектории</string></property>
+          <property name="verticalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+          <property name="horizontalScrollBarPolicy"><enum>Qt::ScrollBarAlwaysOff</enum></property>
+          <property name="renderHints"><set>QPainter::Antialiasing|QPainter::TextAntialiasing</set></property>
+         </widget>
+        </item>
+        <item><widget class="ErrorChart" name="errorChart"><property name="minimumSize"><size><width>0</width><height>182</height></size></property><property name="maximumSize"><size><width>16777215</width><height>182</height></size></property></widget></item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QFrame" name="controlPanel">
+        <property name="minimumSize"><size><width>320</width><height>0</height></size></property>
+        <property name="maximumSize"><size><width>320</width><height>16777215</height></size></property>
+        <layout class="QVBoxLayout" name="controlsLayout">
+         <property name="spacing"><number>12</number></property>
+         <property name="leftMargin"><number>18</number></property>
+         <property name="topMargin"><number>18</number></property>
+         <property name="rightMargin"><number>18</number></property>
+         <property name="bottomMargin"><number>18</number></property>
+         <item><widget class="QLabel" name="labelParameters"><property name="text"><string>ПАРАМЕТРЫ ДВИЖЕНИЯ</string></property></widget></item>
+         <item>
+          <layout class="QHBoxLayout" name="accelerationLayout">
+           <property name="spacing"><number>12</number></property>
+           <item>
+            <layout class="QVBoxLayout" name="accelerationXLayout">
+             <property name="spacing"><number>6</number></property>
+             <item><widget class="QLabel" name="labelAx"><property name="text"><string>Ax, м/с²</string></property><property name="buddy"><cstring>lineEditAx</cstring></property></widget></item>
+             <item><widget class="QLineEdit" name="lineEditAx"><property name="minimumSize"><size><width>0</width><height>36</height></size></property><property name="toolTip"><string>От −10 до 10 м/с². Можно использовать точку или запятую.</string></property><property name="text"><string>0.5</string></property><property name="maxLength"><number>24</number></property></widget></item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="accelerationYLayout">
+             <property name="spacing"><number>6</number></property>
+             <item><widget class="QLabel" name="labelAy"><property name="text"><string>Ay, м/с²</string></property><property name="buddy"><cstring>lineEditAy</cstring></property></widget></item>
+             <item><widget class="QLineEdit" name="lineEditAy"><property name="minimumSize"><size><width>0</width><height>36</height></size></property><property name="toolTip"><string>От −10 до 10 м/с². Можно использовать точку или запятую.</string></property><property name="text"><string>0.3</string></property><property name="maxLength"><number>24</number></property></widget></item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="buttonsLayout">
+           <property name="spacing"><number>10</number></property>
+           <item><widget class="QPushButton" name="btnStart"><property name="minimumSize"><size><width>0</width><height>38</height></size></property><property name="text"><string>Старт</string></property><property name="toolTip"><string>Начать движение с заданным ускорением. В поле ввода также можно нажать Enter.</string></property></widget></item>
+           <item><widget class="QPushButton" name="btnCorrect"><property name="enabled"><bool>false</bool></property><property name="minimumSize"><size><width>0</width><height>38</height></size></property><property name="toolTip"><string>Исправить позицию. Накопленная ошибка скорости сохраняется.</string></property><property name="text"><string>Коррекция</string></property></widget></item>
+          </layout>
+         </item>
+         <item><widget class="QPushButton" name="btnReset"><property name="text"><string>Сбросить симуляцию</string></property><property name="toolTip"><string>Остановить движение и очистить обе траектории, график и счётчик коррекций.</string></property></widget></item>
+         <item><widget class="QFrame" name="divider"><property name="frameShape"><enum>QFrame::HLine</enum></property><property name="frameShadow"><enum>QFrame::Plain</enum></property></widget></item>
+         <item>
+          <widget class="QLabel" name="labelStatus">
+           <property name="sizePolicy"><sizepolicy hsizetype="Preferred" vsizetype="Expanding"><horstretch>0</horstretch><verstretch>1</verstretch></sizepolicy></property>
+           <property name="minimumSize"><size><width>0</width><height>240</height></size></property>
+           <property name="text"><string>Готово к запуску
+
+0.000 м
+ошибка положения
+
+Время модели: 0.00 с
+Коррекций: 0</string></property>
+           <property name="textFormat"><enum>Qt::RichText</enum></property>
+           <property name="alignment"><set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set></property>
+           <property name="wordWrap"><bool>true</bool></property>
+           <property name="textInteractionFlags"><set>Qt::TextSelectableByMouse</set></property>
+          </widget>
+         </item>
+         <item><widget class="QLabel" name="labelModelInfo"><property name="text"><string>Смещение: +0,02 м/с² по X и Y
+Шаг модели: 0,05 с</string></property><property name="wordWrap"><bool>true</bool></property></widget></item>
+         <item><widget class="QPushButton" name="btnSound"><property name="text"><string>Звук коррекции: вкл</string></property><property name="checkable"><bool>true</bool></property><property name="checked"><bool>true</bool></property></widget></item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget><class>NavigationView</class><extends>QGraphicsView</extends><header>navigationview.h</header></customwidget>
+  <customwidget><class>ErrorChart</class><extends>QWidget</extends><header>errorchart.h</header></customwidget>
+ </customwidgets>
+ <tabstops><tabstop>lineEditAx</tabstop><tabstop>lineEditAy</tabstop><tabstop>btnStart</tabstop><tabstop>btnCorrect</tabstop><tabstop>btnReset</tabstop><tabstop>btnSound</tabstop></tabstops>
+ <resources><include location="resources.qrc"/></resources>
+ <connections/>
+</ui>
